@@ -122,15 +122,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
 }
 .empty img {
   user-select: none;
+  pointer-events: none;
 }
 .empty p {
   color: white;
   font-size: 1.3rem;
   font-weight: bold;
+  padding: 1rem;
 }
 .scdn-cvd {
   width: calc(100% - 2rem);
