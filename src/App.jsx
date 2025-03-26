@@ -6,7 +6,8 @@ import { useState, useRef, useEffect } from "react";
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
-  const [editingTaskId, setEditingTaskId] = useState(null); // Track task being edited
+  const [editingTaskId, setEditingTaskId] = useState(null);
+  const [priorityFilter, setPriorityFilter] = useState("All"); // new state for priority filter
   const [formData, setFormData] = useState({
     task: "",
     time: "",
@@ -38,12 +39,8 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(newTasks));
   };
 
-  const readTask = (id) => {
-    return tasks.find(task => task.id === id);
-  };
-
   const updateTask = (id, updatedTask) => {
-    const updatedTasks = tasks.map(task => 
+    const updatedTasks = tasks.map(task =>
       task.id === id ? { ...task, ...updatedTask } : task
     );
     setTasks(updatedTasks);
@@ -58,11 +55,9 @@ function App() {
 
   const openModal = (task = null) => {
     if (task) {
-      // If editing a task, set form data
       setFormData(task);
       setEditingTaskId(task.id);
     } else {
-      // If adding a new task, reset form data
       setFormData({
         task: "",
         time: "",
@@ -115,6 +110,12 @@ function App() {
     }
     closeModal();
   };
+
+  // Filter tasks based on priority
+  const filteredTasks = tasks.filter(task => {
+    if (priorityFilter === "All") return true;
+    return task.priority === priorityFilter;
+  });
 
   return (
     <>
@@ -197,6 +198,14 @@ function App() {
       )}
 
       <div className="whole">
+        <div className="by">
+          <div className="lineby"></div>
+          <div className="lightby"></div>
+          <div>
+            <p>Falcasantos, Milbert</p>
+            <p>Villarez, Arp-j</p>
+          </div>
+        </div>
         <div className="container">
           <div className="title">
             <svg width="962" height="133" viewBox="0 0 962 133" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -204,19 +213,89 @@ function App() {
             </svg>
           </div>
           <div className="scdn-cvd">
+            <div className="filterCon">
+              {/* Priority Filter */}
+              <div className="filters filterPriority">
+                <div className="leftf">
+                  <span>Priority:</span>
+                  <p>{priorityFilter}</p>
+                </div>
+                <div className="chevr">
+                  <i className="fa-solid fa-caret-down"></i>
+                </div>
+                <div className="filterPriorityBtnCon">
+                  {priorityFilter !== "High" && (
+                    <div className="filPri" onClick={() => setPriorityFilter("High")}>
+                      <p>High</p>
+                    </div>
+                  )}
+                  {priorityFilter !== "Medium" && (
+                    <div className="filPri" onClick={() => setPriorityFilter("Medium")}>
+                      <p>Medium</p>
+                    </div>
+                  )}
+                  {priorityFilter !== "Low" && (
+                    <div className="filPri" onClick={() => setPriorityFilter("Low")}>
+                      <p>Low</p>
+                    </div>
+                  )}
+                  {priorityFilter !== "All" && (
+                    <div className="filPri" onClick={() => setPriorityFilter("All")}>
+                      <p>All</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="filters filterCategory">
+                <div className="leftf">
+                  <span>Category:</span>
+                  <p>All</p>
+                </div>
+                <div className="chevr">
+                  <i className="fa-solid fa-caret-down"></i>
+                </div>
+                <div className="filterPriorityBtnCon">
+                  <div className="filPri">
+                    <p>Personal</p>
+                  </div>
+                  <div className="filPri">
+                    <p>Work</p>
+                  </div>
+                  <div className="filPri">
+                    <p>School</p>
+                  </div>
+                  <div className="filPri">
+                    <p>Health & Fitness</p>
+                  </div>
+                  <div className="filPri">
+                    <p>Finance</p>
+                  </div>
+                  <div className="filPri">
+                    <p>Shopping</p>
+                  </div>
+                  <div className="filPri">
+                    <p>Home & Chores</p>
+                  </div>
+                  <div className="filPri">
+                    <p>Social & Events</p>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="rdBtnCon">
               <button onClick={() => openModal()}><i className="fa-solid fa-plus"></i></button>
-              <button><i className="fa-solid fa-pencil"></i></button>
-              <button><i className="fa-solid fa-trash"></i></button>
-              <button><i className="fa-solid fa-check"></i></button>
             </div>
           </div>
           <div className="wrapCon">
             <div className="cardCon">
-              {tasks.length === 0 ? (
+              {filteredTasks.length === 0 ? (
                 <div className="empty">
-                  <img src={Empty} alt="" />
-                  <p>No Pending Task</p>
+                  <img src={Empty} alt="empty" />
+                  {priorityFilter === 'All' ? (
+                    <p>No Pending Task</p>
+                  ) : (
+                    <p>No Pending Task of {priorityFilter} Priority</p>
+                  )}
                 </div>
               ) : (
                 <>
@@ -231,7 +310,7 @@ function App() {
                       <p>Tools</p>
                     </div>
                   </div>
-                  {tasks.map(task => (
+                  {filteredTasks.map(task => (
                     <div className="cards" key={task.id}>
                       <div className="nameDate">
                         <h3>{task.task}</h3>

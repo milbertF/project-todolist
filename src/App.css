@@ -13,6 +13,89 @@ body {
   display: flex;
   justify-content: center;
 }
+.by {
+  position: absolute;
+  right: 0;
+  bottom: 2rem;
+  height: 3rem;
+  width: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  overflow: hidden;
+  interpolate-size: allow-keywords;
+  transition: all 0.5s ease;
+  transition-delay: 0.3s;
+  opacity: 0;
+  animation: scdn-cvd 0.5s ease forwards;
+  animation-delay: 3s;
+}
+@keyframes scdn-cvd {
+  to {
+    opacity: 1;
+  }
+}
+.lineby {
+  position: relative;
+  background-color: #2c2c2c;
+  width: 1rem;
+  border-right: white solid 0.1rem;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+  transition: all 0.5s ease;
+}
+.by > div:nth-child(3) {
+  transform: translateX(-120%);
+  transition: all 1s ease;
+  transition-delay: 0.3s;
+  opacity: 0;
+}
+.by p {
+  font-size: 0.8rem;
+  white-space: nowrap;
+  font-weight: bold;
+}
+.by:hover {
+  width: auto;
+  padding-right: 1rem;
+  box-shadow: inset rgba(255, 255, 255, 0.3) -0.3rem 0.1rem 0.3rem,
+    inset rgba(255, 255, 255, 0.3) 0.3rem -0.1rem 0.3rem;
+}
+.by:hover .lineby {
+  height: 70%;
+  box-shadow: inset black -0.2rem 0rem 0.5rem;
+}
+.by:hover div:nth-child(3) {
+  transform: translateX(0%);
+  opacity: 1;
+}
+.lightby {
+  position: absolute;
+  background: rgb(255, 255, 0);
+  background: linear-gradient(
+    -135deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 70%
+  );
+  height: 8rem;
+  width: 8rem;
+  z-index: -1;
+  rotate: 34deg;
+  left: 0.2rem;
+  top: 20%;
+  transform: translateY(-50%) skew(-20deg);
+}
+/* div {
+  border: red solid 1px;
+} */
 .container {
   width: 50rem;
   max-width: 100%;
@@ -108,6 +191,7 @@ body {
   gap: 1rem;
   overflow: auto;
   isolation: isolate;
+  overflow-y: scroll;
 }
 @keyframes cardCon {
   to {
@@ -136,14 +220,149 @@ body {
   font-size: 1.3rem;
   font-weight: bold;
   padding: 1rem;
+  text-align: center;
+  text-wrap: balance;
 }
 .scdn-cvd {
   width: calc(100% - 2rem);
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: flex-end;
   height: 5rem;
+  opacity: 0;
+  animation: scdn-cvd 0.5s ease forwards;
+  animation-delay: 3s;
 }
+@keyframes scdn-cvd {
+  to {
+    opacity: 1;
+  }
+}
+.filterCon {
+  height: 100%;
+  width: fit-content;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 1rem;
+}
+.filters {
+  position: relative;
+  min-width: 7rem;
+  height: 3rem;
+  border-top-left-radius: calc(0.5rem - 0.1rem);
+  border-top-right-radius: calc(0.5rem - 0.1rem);
+  padding: 0.3rem 1rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: white;
+  border-top: transparent 1px solid;
+  border-left: transparent 1px solid;
+  border-right: transparent 1px solid;
+  transition: all 1s ease;
+}
+.filters:hover {
+  border-top: white 1px solid;
+  border-left: white 1px solid;
+  border-right: white 1px solid;
+}
+.filters:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-top-left-radius: calc(0.5rem - 0.1rem);
+  border-top-right-radius: calc(0.5rem - 0.1rem);
+  height: 0;
+  transition: all 0.5s ease;
+}
+.filters:hover:after {
+  color: white;
+  height: 100%;
+}
+.leftf {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.filters span {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+.filters p {
+  font-weight: bolder;
+}
+.chevr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+.filters:hover .chevr {
+  rotate: 180deg;
+}
+
+.filterPriorityBtnCon {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2c2c2c;
+  z-index: 999;
+  width: calc(100% + 2px);
+  border-bottom-left-radius: calc(0.5rem - 0.1rem);
+  border-bottom-right-radius: calc(0.5rem - 0.1rem);
+  border-bottom: transparent 1px solid;
+  border-left: transparent 1px solid;
+  border-right: transparent 1px solid;
+  transition: height 0.5s ease, border 0.5s ease, opacity 1s ease;
+  box-sizing: border-box;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  interpolate-size: allow-keywords;
+}
+.filters:hover .filterPriorityBtnCon {
+  border-bottom: white 1px solid;
+  border-left: white 1px solid;
+  border-right: white 1px solid;
+  height: auto;
+  opacity: 1;
+  box-sizing: border-box;
+}
+.filPri {
+  padding: 0.3rem 1rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.filPri:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding-left: 1.5rem;
+}
+.fillPri p {
+  font-size: 1rem;
+  white-space: nowrap;
+}
+.filters:hover .filterPriorityBtnCon .fillPri:nth-child(2) {
+  animation: filPri2 0.5s ease forwards;
+}
+@keyframes filPri2 {
+  to {
+    top: calc(1.5rem);
+  }
+}
+
+/* div {
+  border: red solid 1px;
+} */
 .rdBtnCon {
   height: 0;
   width: fit-content;
@@ -187,21 +406,9 @@ body {
 .rdBtnCon button:nth-child(1) {
   background-color: green;
   border-top-left-radius: calc(0.5rem - 0.1rem);
-  animation: button1 1s ease forwards;
-  animation-delay: 4.2s;
-}
-.rdBtnCon button:nth-child(2) {
-  animation: button1 1s ease forwards;
-  animation-delay: 4.5s;
-}
-.rdBtnCon button:nth-child(3) {
-  animation: button1 1s ease forwards;
-  animation-delay: 4.8s;
-}
-.rdBtnCon button:nth-child(4) {
   border-top-right-radius: calc(0.5rem - 0.1rem);
   animation: button1 1s ease forwards;
-  animation-delay: 5.1s;
+  animation-delay: 4.2s;
 }
 @keyframes button1 {
   to {
