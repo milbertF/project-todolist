@@ -1,0 +1,480 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
+
+*:not(dialog) {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: rgb(20, 20, 20);
+  font-family: sans-serif;
+}
+.whole {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.container {
+  width: 50rem;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.title {
+  width: 30rem;
+  max-width: 100%;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.title > svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  animation: svg 2s ease forwards;
+  animation-delay: 2s;
+  max-width: 80%;
+}
+@keyframes svg {
+  to {
+    top: 1rem;
+    transform: translate(-50%, 0);
+    width: 30rem;
+    max-width: 80%;
+  }
+}
+.title > svg path {
+  fill: transparent;
+  stroke: white;
+  stroke-width: 3;
+  stroke-dasharray: 610;
+  stroke-dashoffset: 610;
+  animation: path 4s ease forwards;
+}
+@keyframes path {
+  0% {
+    stroke-dashoffset: 610;
+    fill: transparent;
+  }
+  50% {
+    fill: transparent;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: white;
+  }
+}
+
+.addCon button {
+  min-width: 3rem;
+  padding-inline: 2rem;
+  font-weight: bolder;
+  font-size: 1.3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: rgb(0, 90, 0);
+  border: white solid 2px;
+  color: white;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.addCon button:hover {
+  background-color: green;
+}
+
+.cardCon {
+  position: relative;
+  width: 100%;
+  height: 0;
+  flex-grow: 0;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: rgb(30, 30, 30);
+  animation: cardCon 3s ease forwards;
+  animation-delay: 3s;
+  opacity: 0;
+  gap: 1rem;
+  overflow: auto;
+  isolation: isolate;
+}
+@keyframes cardCon {
+  to {
+    flex-grow: 1;
+    opacity: 1;
+  }
+}
+
+.empty {
+  position: absolute;
+  width: 40%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.empty img {
+  user-select: none;
+  pointer-events: none;
+}
+.empty p {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 1rem;
+}
+.scdn-cvd {
+  width: calc(100% - 2rem);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 5rem;
+}
+.rdBtnCon {
+  height: 0;
+  width: fit-content;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  overflow: hidden;
+  gap: 0.1rem;
+  border-top: white 1px solid;
+  border-left: white 1px solid;
+  border-right: white 1px solid;
+  padding-top: 0.1rem;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+  animation: rdBtnCon 0.5s ease-in forwards;
+  animation-delay: 4s;
+  opacity: 0;
+}
+@keyframes rdBtnCon {
+  to {
+    height: 2rem;
+    opacity: 1;
+  }
+}
+
+.rdBtnCon button {
+  height: 0;
+  width: 3rem;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+}
+.rdBtnCon button i {
+  transition: scale 0.3s ease;
+}
+.rdBtnCon button:hover i {
+  scale: 1.5;
+}
+.rdBtnCon button:nth-child(1) {
+  background-color: green;
+  border-top-left-radius: calc(0.5rem - 0.1rem);
+  animation: button1 1s ease forwards;
+  animation-delay: 4.2s;
+}
+.rdBtnCon button:nth-child(2) {
+  animation: button1 1s ease forwards;
+  animation-delay: 4.5s;
+}
+.rdBtnCon button:nth-child(3) {
+  animation: button1 1s ease forwards;
+  animation-delay: 4.8s;
+}
+.rdBtnCon button:nth-child(4) {
+  border-top-right-radius: calc(0.5rem - 0.1rem);
+  animation: button1 1s ease forwards;
+  animation-delay: 5.1s;
+}
+@keyframes button1 {
+  to {
+    height: 100%;
+    opacity: 1;
+  }
+}
+.cardHead {
+  height: 2rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  color: white;
+  justify-content: flex-end;
+  padding: 1rem;
+  box-sizing: border-box;
+  position: sticky;
+  top: -1rem;
+  backdrop-filter: blur(2rem);
+  z-index: 2;
+}
+.cardHead > * {
+  display: flex;
+  align-items: center;
+}
+.cards {
+  height: 5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  color: white;
+  padding: 1rem;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.cards > * {
+  display: flex;
+  align-items: center;
+}
+.nameDate {
+  width: 40%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.nameDate h3 {
+  font-size: 1.3rem;
+  white-space: nowrap;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nameDate time {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  z-index: -1;
+}
+.priority,
+.priorityHead {
+  width: 20%;
+}
+.priority p {
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.5rem;
+}
+.high {
+  background-color: rgba(255, 0, 0, 0.3);
+}
+.medium {
+  background-color: rgba(255, 166, 0, 0.3);
+}
+.low {
+  background-color: rgba(255, 255, 0, 0.3);
+}
+.Category,
+.CategoryHead {
+  width: 20%;
+}
+.tools,
+.toolsHead {
+  width: 20%;
+}
+.tools {
+  display: flex;
+  gap: 0.5rem;
+}
+.tools i {
+  padding: 0.5rem;
+  width: 0.8rem;
+  aspect-ratio: 1/1;
+  font-size: 0.8rem;
+  background-color: rgb(53, 53, 53);
+  color: rgb(202, 202, 202);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.checkBox {
+  box-sizing: border-box;
+  display: block;
+  cursor: pointer;
+  width: 1.5rem;
+  aspect-ratio: 1/1;
+  border: 2px solid rgba(255, 255, 255, 0);
+  border-radius: 0.5em;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0px 0px 0px 1.5px #fff;
+  margin-left: auto;
+}
+
+.checkBox div {
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  top: -52px;
+  left: -52px;
+  position: absolute;
+  transform: rotateZ(45deg);
+  z-index: 100;
+}
+
+.checkBox input[type="checkbox"]:checked + div {
+  left: -10px;
+  top: -10px;
+}
+
+.checkBox input[type="checkbox"] {
+  position: absolute;
+  left: 50px;
+  visibility: hidden;
+}
+
+.transition {
+  transition: 1s ease;
+}
+
+::-webkit-scrollbar {
+  width: 0.2rem;
+  height: 0.2rem;
+}
+::-webkit-scrollbar-track {
+  background-color: aliceblue;
+}
+::-webkit-scrollbar-thumb {
+  background-color: red;
+}
+
+.wrapCon {
+  border-radius: 1rem;
+  overflow: hidden;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  border: white solid 1px;
+  animation: wrapCon 2s ease forwards;
+  animation-delay: 3s;
+  opacity: 0;
+}
+@keyframes wrapCon {
+  to {
+    opacity: 1;
+  }
+}
+
+dialog {
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2rem);
+  color: white;
+  border: none;
+  overflow: auto;
+}
+@keyframes dialog {
+  to {
+    scale: 1;
+    filter: blur(0rem);
+  }
+}
+.modalCon {
+  width: 20rem;
+  margin-block: 2rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  border-radius: 0.5rem;
+  border: white solid 1px;
+  background-color: #292929;
+  animation: dialog 0.5s ease forwards;
+  scale: 1.2;
+  filter: blur(1rem);
+}
+.modalCon form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.modalCon span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  height: 1.5rem;
+  aspect-ratio: 1/1;
+  background-color: rgba(90, 0, 0);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.modalCon span:hover {
+  background-color: red;
+}
+.part {
+  display: flex;
+  flex-direction: column;
+}
+.part label {
+  font-size: 0.9rem;
+}
+.inputPart {
+  height: 2.5rem;
+  display: flex;
+}
+.inputPart input,
+.inputPart select {
+  width: 100%;
+  border-radius: 0.3rem;
+  padding-inline: 0.5rem;
+}
+.partWrap {
+  display: flex;
+  gap: 1.9rem;
+}
+.partWrap .part {
+  width: 50%;
+}
+.modalCon button {
+  height: 2.5rem;
+  margin-top: 0.9rem;
+  margin-bottom: 2rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  background-color: rgb(0, 90, 0);
+  color: white;
+  font-weight: bolder;
+  font-size: 1.3rem;
+  border: white solid 2px;
+  color: white;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.modalCon button:hover {
+  background-color: green;
+}
+/* div {
+  border: red solid 1px;
+} */
