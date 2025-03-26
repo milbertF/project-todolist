@@ -31,10 +31,10 @@ body {
   transition: all 0.5s ease;
   transition-delay: 0.3s;
   opacity: 0;
-  animation: scdn-cvd 0.5s ease forwards;
+  animation: by 0.5s ease forwards;
   animation-delay: 3s;
 }
-@keyframes scdn-cvd {
+@keyframes by {
   to {
     opacity: 1;
   }
@@ -229,9 +229,6 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   height: 5rem;
-  opacity: 0;
-  animation: scdn-cvd 0.5s ease forwards;
-  animation-delay: 3s;
 }
 @keyframes scdn-cvd {
   to {
@@ -262,6 +259,14 @@ body {
   border-left: transparent 1px solid;
   border-right: transparent 1px solid;
   transition: all 1s ease;
+  animation: filters 0.1s ease forwards;
+  animation-delay: 3s;
+  pointer-events: none;
+}
+@keyframes filters {
+  to {
+    pointer-events: all;
+  }
 }
 .filters:hover {
   border-top: white 1px solid;
@@ -289,6 +294,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  animation: scdn-cvd 0.5s ease forwards;
+  animation-delay: 3s;
+  opacity: 0;
 }
 .filters span {
   font-size: 0.8rem;
@@ -302,6 +310,9 @@ body {
   justify-content: center;
   align-items: center;
   transition: all 0.5s ease;
+  opacity: 0;
+  animation: scdn-cvd 0.5s ease forwards;
+  animation-delay: 3s;
 }
 .filters:hover .chevr {
   rotate: 180deg;
@@ -353,11 +364,6 @@ body {
 }
 .filters:hover .filterPriorityBtnCon .fillPri:nth-child(2) {
   animation: filPri2 0.5s ease forwards;
-}
-@keyframes filPri2 {
-  to {
-    top: calc(1.5rem);
-  }
 }
 
 /* div {
