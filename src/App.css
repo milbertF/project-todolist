@@ -515,6 +515,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tools i:hover {
+  scale: 1.1;
+  background-color: rgb(65, 65, 65);
+  color: rgb(255, 255, 255);
 }
 .checkBox {
   box-sizing: border-box;
@@ -696,7 +703,7 @@ dialog {
   color: green;
 }
 .cardDone {
-  background-color: rgba(0, 128, 0, 0.1);
+  background-color: rgba(0, 128, 0, 0.03);
 }
 /* div {
   border: red solid 1px;
