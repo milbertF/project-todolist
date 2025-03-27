@@ -83,7 +83,7 @@ function App() {
       setEditingTaskId(null);
     }
     setIsOpen(true);
-    dialogRef.current.showModal();
+    // dialogRef.current.showModal();
   };
 
   const closeModal = () => {
@@ -171,6 +171,7 @@ function App() {
                     required
                     value={formData.time}
                     onChange={handleInputChange}
+                    min={new Date().toISOString().slice(0, 16)}
                   />
                 </div>
               </div>
@@ -275,7 +276,7 @@ function App() {
             <div className="cardCon">
               {filteredTasks.length === 0 ? (
                 <div className="empty">
-                  <img src={Empty} alt="empty" />
+                  <img src={Empty} alt="Empty Task" />
                   {priorityFilter === 'All' ? (
                     <p>No Pending Task</p>
                   ) : (

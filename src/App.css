@@ -202,7 +202,8 @@ body {
 
 .empty {
   position: absolute;
-  width: 40%;
+  width: 20rem;
+  max-width: 90%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -449,6 +450,7 @@ body {
   flex-shrink: 0;
   position: relative;
   z-index: 1;
+  transition: all 0.5s ease;
 }
 .cards > * {
   display: flex;
@@ -777,5 +779,22 @@ dialog {
   100% {
     box-shadow: 0 0 0 13px #0b6e4f30;
     rotate: 0;
+  }
+}
+
+/* div {
+  border: red solid 1px;
+  box-sizing: border-box;
+} */
+@media (max-width: 1200px) {
+  .by {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .cardHead {
+    min-width: 35rem;
+  }
+  .cards {
+    min-width: 35rem;
   }
 }
