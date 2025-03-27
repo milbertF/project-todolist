@@ -7,13 +7,16 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [editingTaskId, setEditingTaskId] = useState(null);
-  const [priorityFilter, setPriorityFilter] = useState("All"); // new state for priority filter
+  const [priorityFilter, setPriorityFilter] = useState("All");
+
   const [formData, setFormData] = useState({
     task: "",
     time: "",
     priority: "High",
-    category: "Personal"
+    category: "Personal",
+    status: "Pending", // Default status
   });
+
   const dialogRef = useRef(null);
 
   // Load tasks from localStorage on mount
@@ -32,23 +35,35 @@ function App() {
     return "";
   };
 
-  // CRUD Operations
+  // Create a new task
   const createTask = (task) => {
-    const newTasks = [...tasks, task];
+    const newTask = { ...task, id: Date.now(), status: "Pending" }; // Set status to Pending
+    const newTasks = [...tasks, newTask];
     setTasks(newTasks);
     localStorage.setItem("tasks", JSON.stringify(newTasks));
   };
 
+  // Update an existing task
   const updateTask = (id, updatedTask) => {
-    const updatedTasks = tasks.map(task =>
+    const updatedTasks = tasks.map((task) =>
       task.id === id ? { ...task, ...updatedTask } : task
     );
     setTasks(updatedTasks);
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
+  // Delete a task
   const deleteTask = (id) => {
-    const updatedTasks = tasks.filter(task => task.id !== id);
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  };
+
+  // Toggle task status (Pending <-> Done)
+  const toggleTaskStatus = (id) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, status: task.status === "Pending" ? "Done" : "Pending" } : task
+    );
     setTasks(updatedTasks);
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
@@ -62,7 +77,8 @@ function App() {
         task: "",
         time: "",
         priority: "High",
-        category: "Personal"
+        category: "Personal",
+        status: "Pending",
       });
       setEditingTaskId(null);
     }
@@ -95,9 +111,9 @@ function App() {
         key = id;
         break;
     }
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [key]: value
+      [key]: value,
     }));
   };
 
@@ -112,10 +128,14 @@ function App() {
   };
 
   // Filter tasks based on priority
-  const filteredTasks = tasks.filter(task => {
+  const filteredTasks = tasks.filter((task) => {
     if (priorityFilter === "All") return true;
     return task.priority === priorityFilter;
   });
+
+  useEffect(() => {
+    console.log("Stored Tasks:", JSON.parse(localStorage.getItem("tasks")));
+  }, []);
 
   return (
     <>
@@ -224,6 +244,11 @@ function App() {
                   <i className="fa-solid fa-caret-down"></i>
                 </div>
                 <div className="filterPriorityBtnCon">
+                  {priorityFilter !== "All" && (
+                    <div className="filPri" onClick={() => setPriorityFilter("All")}>
+                      <p>All</p>
+                    </div>
+                  )}
                   {priorityFilter !== "High" && (
                     <div className="filPri" onClick={() => setPriorityFilter("High")}>
                       <p>High</p>
@@ -239,46 +264,6 @@ function App() {
                       <p>Low</p>
                     </div>
                   )}
-                  {priorityFilter !== "All" && (
-                    <div className="filPri" onClick={() => setPriorityFilter("All")}>
-                      <p>All</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="filters filterCategory">
-                <div className="leftf">
-                  <span>Category:</span>
-                  <p>All</p>
-                </div>
-                <div className="chevr">
-                  <i className="fa-solid fa-caret-down"></i>
-                </div>
-                <div className="filterPriorityBtnCon">
-                  <div className="filPri">
-                    <p>Personal</p>
-                  </div>
-                  <div className="filPri">
-                    <p>Work</p>
-                  </div>
-                  <div className="filPri">
-                    <p>School</p>
-                  </div>
-                  <div className="filPri">
-                    <p>Health & Fitness</p>
-                  </div>
-                  <div className="filPri">
-                    <p>Finance</p>
-                  </div>
-                  <div className="filPri">
-                    <p>Shopping</p>
-                  </div>
-                  <div className="filPri">
-                    <p>Home & Chores</p>
-                  </div>
-                  <div className="filPri">
-                    <p>Social & Events</p>
-                  </div>
                 </div>
               </div>
             </div>
@@ -310,28 +295,92 @@ function App() {
                       <p>Tools</p>
                     </div>
                   </div>
-                  {filteredTasks.map(task => (
-                    <div className="cards" key={task.id}>
-                      <div className="nameDate">
-                        <h3>{task.task}</h3>
-                        <time dateTime={task.time}>{new Date(task.time).toLocaleString()}</time>
-                      </div>
-                      <div className="priority">
-                        <p className={getPriorityClass(task.priority)}>{task.priority}</p>
-                      </div>
-                      <div className="Category">
-                        <p>{task.category}</p>
-                      </div>
-                      <div className="tools">
-                        <i className="fa-solid fa-pencil" onClick={() => openModal(task)}></i>
-                        <i className="fa-solid fa-trash" onClick={() => deleteTask(task.id)}></i>
-                        <label className="checkBox">
-                          <input type="checkbox" />
-                          <div className="transition"></div>
-                        </label>
-                      </div>
-                    </div>
-                  ))}
+                  {filteredTasks
+                    .sort((a, b) => {
+                      // If both tasks have the same status, sort by id in descending order (assuming id is a timestamp)
+                      if (a.status === b.status) return b.id - a.id;
+                      // Otherwise, Pending tasks come before Done tasks
+                      return a.status === "Pending" ? -1 : 1;
+                    })
+                    .map(task =>
+                      task.status === "Done" ? (
+                        <div className="cards cardDone" key={task.id}>
+                          <div className="nameDate">
+                            {task.status === "Done" ? (
+                              <h3 className="taskDone">{task.task}</h3>
+                            ) : (
+                              <h3>{task.task}</h3>
+                            )}
+                            <time dateTime={task.time}>
+                              {new Date(task.time).toLocaleString()}
+                            </time>
+                          </div>
+                          <div className="priority">
+                            <p className={getPriorityClass(task.priority)}>{task.priority}</p>
+                          </div>
+                          <div className="Category">
+                            <p>{task.category}</p>
+                          </div>
+                          <div className="tools">
+                            {task.status === "Done" ? (
+                              <i className="fa-solid fa-trash" onClick={() => deleteTask(task.id)}></i>
+                            ) : (
+                              <>
+                                <i className="fa-solid fa-pencil" onClick={() => openModal(task)}></i>
+                                <i className="fa-solid fa-trash" onClick={() => deleteTask(task.id)}></i>
+                              </>
+                            )}
+                            <label className="containerCheckbox">
+                              <input
+                                type="checkbox"
+                                checked={task.status === "Done"}
+                                onChange={() => toggleTaskStatus(task.id)}
+                              />
+                              <div className="checkmark"></div>
+                            </label>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="cards" key={task.id}>
+                          <div className="nameDate">
+                            {task.status === "Done" ? (
+                              <h3 className="taskDone">{task.task}</h3>
+                            ) : (
+                              <h3>{task.task}</h3>
+                            )}
+                            <time dateTime={task.time}>
+                              {new Date(task.time).toLocaleString()}
+                            </time>
+                          </div>
+                          <div className="priority">
+                            <p className={getPriorityClass(task.priority)}>{task.priority}</p>
+                          </div>
+                          <div className="Category">
+                            <p>{task.category}</p>
+                          </div>
+                          <div className="tools">
+                            {task.status === "Done" ? (
+                              <i className="fa-solid fa-trash" onClick={() => deleteTask(task.id)}></i>
+                            ) : (
+                              <>
+                                <i className="fa-solid fa-pencil" onClick={() => openModal(task)}></i>
+                                <i className="fa-solid fa-trash" onClick={() => deleteTask(task.id)}></i>
+                              </>
+                            )}
+                            <label className="containerCheckbox">
+                              <input
+                                type="checkbox"
+                                checked={task.status === "Done"}
+                                onChange={() => toggleTaskStatus(task.id)}
+                              />
+                              <div className="checkmark"></div>
+                            </label>
+                          </div>
+                        </div>
+                      )
+                    )}
+
+
                 </>
               )}
             </div>
