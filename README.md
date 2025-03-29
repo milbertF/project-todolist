@@ -20,7 +20,7 @@ Stay organized and boost productivity with our smart to-do list! Easily categori
 
 ## 📷 Screenshots
 
-_(Include screenshots of your app here)_
+![Home Page](./src/assets/images/screenshot.png)
 
 ---
 
@@ -37,11 +37,11 @@ _(Include screenshots of your app here)_
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/todo-list-app.git
+git clone https://github.com/milbertF/project-todolist.git
 cd todo-list-app
 ```
 
-### 1️⃣ Install Dependencies
+### 2️⃣ Install Dependencies
 
 ```bash
 npm install
@@ -61,6 +61,6 @@ Contributions are welcome! Feel free to submit issues or pull requests.
 
 This project is licensed under the MIT License.
 
-Contact:
-If you have any questions, feel free to reach out!
-[mfalcasantos23@gmail.com](https://mail.google.com/mail/?view=cm&fs=1&to=mfalcasantos23@gmail.com) send your thoughts and suggestions here.
+## Contact:
+
+If you have any questions, feel free to reach out! [mfalcasantos23@gmail.com](https://mail.google.com/mail/?view=cm&fs=1&to=mfalcasantos23@gmail.com) send your thoughts and suggestions here.
