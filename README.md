@@ -1,12 +1,62 @@
-# Todo List App
+# 📝 Todo List App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Created by Falcasantos and Villares
 
-Currently, two official plugins are available:
+Stay organized and boost productivity with our smart to-do list! Easily categorize tasks, set priorities, and track progress for work, personal goals, and daily routines—all in one place.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 **Live Demo:** [Todo List App](https://todolistapp-falcasantos-villarez.netlify.app/)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📌 Features
+
+✅ Add, edit, and delete tasks  
+✅ Organize tasks into categories  
+✅ Set priorities (high, medium, low)  
+✅ Track progress with status updates  
+✅ User-friendly and responsive UI
+
+---
+
+## 📷 Screenshots
+
+_(Include screenshots of your app here)_
+
+---
+
+## 🛠️ Technologies Used
+
+- HTML, CSS, JavaScript
+- React (if applicable)
+- Tailwind CSS (if applicable)
+- LocalStorage / Firebase (if applicable)
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/todo-list-app.git
+cd todo-list-app
+npm install
+npm run dev
+```
+
+## 📌 Contributing
+
+Contributions are welcome! Feel free to submit issues or pull requests.
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+📩 Contact:
+💡 If you have any questions, feel free to reach out!
+
+vbnet
+Copy
+Edit
+
+Let me know if you want any modifications! 🚀
