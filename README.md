@@ -18,9 +18,7 @@ Stay organized and boost productivity with our smart to-do list! Easily categori
 
 ---
 
-## 📷 Screenshots
-
-![Home Page](./src/assets/images/screenshot.png)
+![Screenshot](./src/assets/images/screenshot.png)
 
 ---
 
@@ -38,7 +36,7 @@ Stay organized and boost productivity with our smart to-do list! Easily categori
 
 ```bash
 git clone https://github.com/milbertF/project-todolist.git
-cd todo-list-app
+cd todolist
 ```
 
 ### 2️⃣ Install Dependencies
