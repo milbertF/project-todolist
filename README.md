@@ -1,6 +1,6 @@
-# 📝 Todo List App
+# Todo List App
 
-## 🚀 Created by Falcasantos and Villares
+## Created by Falcasantos and Villares
 
 Stay organized and boost productivity with our smart to-do list! Easily categorize tasks, set priorities, and track progress for work, personal goals, and daily routines—all in one place.
 
@@ -8,7 +8,7 @@ Stay organized and boost productivity with our smart to-do list! Easily categori
 
 ---
 
-## 📌 Features
+## Features
 
 ✅ Add, edit, and delete tasks  
 ✅ Organize tasks into categories  
@@ -24,39 +24,43 @@ _(Include screenshots of your app here)_
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - HTML, CSS, JavaScript
-- React (if applicable)
-- Tailwind CSS (if applicable)
-- LocalStorage / Firebase (if applicable)
+- React
+- LocalStorage
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/yourusername/todo-list-app.git
 cd todo-list-app
+```
+
+### 1️⃣ Install Dependencies
+
+```bash
 npm install
+```
+
+### 3️⃣ Run the App
+
+```bash
 npm run dev
 ```
 
-## 📌 Contributing
+## Contributing
 
 Contributions are welcome! Feel free to submit issues or pull requests.
 
-## 📜 License
+## License
 
 This project is licensed under the MIT License.
 
-📩 Contact:
-💡 If you have any questions, feel free to reach out!
-
-vbnet
-Copy
-Edit
-
-Let me know if you want any modifications! 🚀
+Contact:
+If you have any questions, feel free to reach out!
+[mfalcasantos23@gmail.com](https://mail.google.com/mail/?view=cm&fs=1&to=mfalcasantos23@gmail.com) send your thoughts and suggestions here.
